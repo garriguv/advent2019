@@ -19,7 +19,8 @@ type Day []Part
 
 func init() {
 	days[1] = Day([]Part{
-		func(input string) interface{} { return module.FuelRequired(input) },
+		func(input string) interface{} { return module.FuelRequired(input, module.FuelRequiredForModule) },
+		func(input string) interface{} { return module.FuelRequired(input, module.FuelRequiredForModule2) },
 	})
 }
 

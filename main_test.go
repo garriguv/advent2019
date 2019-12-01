@@ -34,6 +34,7 @@ func TestIntegration(t *testing.T) {
 
 	want := `Day 1: https://adventofcode.com/2019/day/1
 Part 1: 3421505
+Part 2: 5129386
 `
 	got := string(output)
 	if want != string(output) {
