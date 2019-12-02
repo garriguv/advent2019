@@ -8,19 +8,7 @@ import (
 )
 
 func Compute(program string) int {
-	var s scanner.Scanner
-	s.Init(strings.NewReader(program))
-	s.Mode = scanner.ScanInts
-	s.Whitespace = 1<<',' | 1<<' ' | 1<<'\n'
-
-	var input = make([]int, 0)
-	for tok := s.Scan(); tok != scanner.EOF; tok = s.Scan() {
-		val, err := strconv.Atoi(s.TokenText())
-		if err != nil {
-			log.Fatal("invalid token:", err)
-		}
-		input = append(input, val)
-	}
+	input := parseProgram(program)
 
 	input[1] = 12
 	input[2] = 2
@@ -28,6 +16,23 @@ func Compute(program string) int {
 	runIntCode(&input)
 
 	return input[0]
+}
+
+func FindNounVerb(program string, want int) int {
+	input := parseProgram(program)
+	for noun := 0; noun <= 99; noun++ {
+		for verb := 0; verb <= 99; verb++ {
+			cpy := make([]int, len(input))
+			copy(cpy, input)
+			cpy[1] = noun
+			cpy[2] = verb
+			runIntCode(&cpy)
+			if cpy[0] == want {
+				return 100*noun + verb
+			}
+		}
+	}
+	return -1
 }
 
 func runIntCode(input *[]int) {
@@ -58,4 +63,22 @@ func runIntCode(input *[]int) {
 
 out:
 	*input = tmp
+}
+
+func parseProgram(input string) []int {
+	var s scanner.Scanner
+	s.Init(strings.NewReader(input))
+	s.Mode = scanner.ScanInts
+	s.Whitespace = 1<<',' | 1<<' ' | 1<<'\n'
+
+	var output = make([]int, 0)
+	for tok := s.Scan(); tok != scanner.EOF; tok = s.Scan() {
+		val, err := strconv.Atoi(s.TokenText())
+		if err != nil {
+			log.Fatal("invalid token:", err)
+		}
+		output = append(output, val)
+	}
+
+	return output
 }

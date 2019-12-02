@@ -25,6 +25,7 @@ func init() {
 	}
 	days[2] = []Part{
 		func(input string) interface{} { return computer.Compute(input) },
+		func(input string) interface{} { return computer.FindNounVerb(input, 19690720) },
 	}
 }
 
