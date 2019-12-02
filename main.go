@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"log"
 
+	"github.com/garriguv/advent2019/pkg/computer"
 	"github.com/garriguv/advent2019/pkg/module"
 )
 
@@ -18,10 +19,13 @@ type Part func(string) interface{}
 type Day []Part
 
 func init() {
-	days[1] = Day([]Part{
+	days[1] = []Part{
 		func(input string) interface{} { return module.FuelRequired(input, module.FuelRequiredForModule) },
 		func(input string) interface{} { return module.FuelRequired(input, module.FuelRequiredForModule2) },
-	})
+	}
+	days[2] = []Part{
+		func(input string) interface{} { return computer.Compute(input) },
+	}
 }
 
 func main() {
