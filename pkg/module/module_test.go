@@ -24,7 +24,7 @@ func TestFuelRequiredForModule(t *testing.T) {
 	}
 	for _, test := range tests {
 		if want, got := test.want, FuelRequiredForModule(test.in); want != got {
-			t.Errorf("incorrect fuelRequired: want %d got %d", want, got)
+			t.Errorf("incorrect FuelRequiredForModule: want %d got %d", want, got)
 		}
 	}
 }
@@ -39,7 +39,7 @@ func TestFuelRequiredForModule2(t *testing.T) {
 	}
 	for _, test := range tests {
 		if want, got := test.want, FuelRequiredForModule2(test.in); want != got {
-			t.Errorf("incorrect fuelRequired: want %d got %d", want, got)
+			t.Errorf("incorrect FuelRequiredForModule2: want %d got %d", want, got)
 		}
 	}
 }
